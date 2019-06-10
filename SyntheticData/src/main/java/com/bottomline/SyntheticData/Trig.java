@@ -41,7 +41,6 @@ public class Trig {
      * @return the value of the trig function
      */
     private double computeValue(double x) {
-        double retval = 0;
         switch(type) {
             case SIN:
                 return coeff * Math.sin(x);
@@ -77,6 +76,6 @@ public class Trig {
                 x = 1.0 / Math.tan(x);
                 return coeff * x;
         }
-        return retval;
+        return 0;
     }
 }
