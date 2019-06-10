@@ -20,7 +20,6 @@ public class Trig extends Function{
     	super();
     	this.type = type;
         this.coeff = coeff;
-        super.compute = false;
     }
 
     /**
@@ -28,41 +27,42 @@ public class Trig extends Function{
      * @param x the variable
      * @return the value of the trig function
      */
-    protected void compute(double x) {
+    protected double compute(double x) {
         switch(type) {
             case SIN:
-                super.val = coeff * Math.sin(x);
+                return coeff * Math.sin(x);
             case COS:
-            	super.val = coeff * Math.cos(x);
+            	return coeff * Math.cos(x);
             case TAN:
-            	super.val = coeff * Math.tan(x);
+            	return coeff * Math.tan(x);
             case CSC:
                 x = 1.0 / Math.sin(x);
-                super.val = coeff * x;
+                return coeff * x;
             case SEC:
                 x = 1.0 / Math.cos(x);
-                super.val = coeff * x;
+                return coeff * x;
             case COT:
                 x = 1.0 / Math.tan(x);
-                super.val = coeff * x;
+                return coeff * x;
             case ARCSIN:
-            	super.val = Math.asin(x);
+            	return Math.asin(x);
             case ARCCOS:
-            	super.val = Math.acos(x);
+            	return Math.acos(x);
             case ARCTAN:
-            	super.val = Math.atan(x);
+            	return Math.atan(x);
             case ARCCSC:
                 x = 1.0 / x;
                 x = 1.0 / Math.sin(x);
-                super.val = coeff * x;
+                return coeff * x;
             case ARCSEC:
                 x = 1.0 / x;
                 x = 1.0 / Math.cos(x);
-                super.val = coeff * x;
+                return coeff * x;
             case ARCCOT:
                 x = 1.0 / x;
                 x = 1.0 / Math.tan(x);
-                super.val = coeff * x;
+                return coeff * x;
         }
+        return 0;
     }
 }

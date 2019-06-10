@@ -15,11 +15,9 @@ public class Poly extends Function {
 		this.exp = exp;
 	}
 	
-	//computes the value of the function for a given x
 	@Override
-	protected void compute(double x) {
-		super.compute = true;
-		super.val = (this.coeff * Math.pow(x, this.exp));
+	protected double compute(double x) {
+		return (this.coeff * Math.pow(x, this.exp));
 	}
 }
 
