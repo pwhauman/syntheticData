@@ -41,6 +41,30 @@ public class Column {
 	
 	}
 	
+	/*
+	 * Constructs a column from a number of rows and a function
+	 * @param numRows - the number of rows to be generated
+	 * @param dist - a GaussDist object
+	 */
+	public Column(Column baseCol, Function func) {
+		this.numRows = baseCol.getColumn().length;
+		this.column = new double[numRows];
+		this.func = func;
+		this.applyFunc(baseCol, func);
+	
+	}
+	
+	/*
+	 * Constructs a column from a number of rows and a function
+	 * @param baseCol - the column to apply the function to
+	 * @param func - the function to apply to the column
+	 */
+	public void applyFunc(Column baseCol, Function func) {
+		for(int i = 0; i < numRows; i++) {
+			this.column[i] = func.getVal(baseCol.getColumn()[i]);
+		}
+	}
+	
 	public void genFuncColumn() {
 		for (int i = 0; i < numRows; i++) {
 			this.column[i] = this.func.getVal(i);
