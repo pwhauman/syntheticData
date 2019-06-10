@@ -2,6 +2,18 @@ package com.bottomline.SyntheticData;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 
+/*
+ * 
+ * 
+ * 
+ * 
+ * THIS CLASS MAY BE DELETED, MAKE SURE WE NEED IT BEFORE EDITING
+ * 
+ * 
+ * 
+ * 
+ */
+
 public class GaussDist {
     private double mean;
     private double standarDev;
