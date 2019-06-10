@@ -6,7 +6,7 @@
  */
 
 package com.bottomline.SyntheticData;
-import org.apache.commons.math.distribution.NormalDistribution;
+import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class Column {
 	private int numRows;
@@ -43,14 +43,13 @@ public class Column {
 	
 	public void genFuncColumn() {
 		for (int i = 0; i < numRows; i++) {
-			this.column[i] = this.func.getval(i);
+			this.column[i] = this.func.getVal(i);
 		}	
 	}
 	
-	public void genDistColumn() {
-		for (int i = 0; i < numRows; i++) {
-			this.column[i] = this.
-		}	
+	public double[] genDistColumn() {
+		GaussDist dist = new GaussDist(1, 2);
+		return dist.generateSample(numRows);
 	}
 	
 	public double[] getColumn() {

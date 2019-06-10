@@ -15,7 +15,7 @@ public class GaussDist {
     }
 
     public double generateSample() {
-        return gaussDist.sample;
+        return gaussDist.sample();
     }
 
     public double[] generateSample(int sampleSize) {
