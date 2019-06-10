@@ -14,8 +14,7 @@ public class Exp extends Function{
 	}
 
 	//computes the value of the function for a given x
-	protected void compute(double x) {
-		super.compute = true;
-		super.val = Math.pow(this.base, x);
+	protected double compute(double x) {
+		return Math.pow(this.base, x);
 	}
 }

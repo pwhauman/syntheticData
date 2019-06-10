@@ -7,78 +7,88 @@
 
 package com.bottomline.SyntheticData;
 import org.apache.commons.math3.distribution.NormalDistribution;
+import java.util.ArrayList;
 
 public class Column {
-	private int numRows;
-	private double column[];
-	private Function func;
-	private GaussDist dist;
+	private static long numRows = 0;
+	private String colName;
+	private ArrayList<Double> columnData = new ArrayList<Double>(); 
+	private Function func = null;
+	private GaussDist dist = null;
 	
-	
-	/*
-	 * Constructs a column from a number of rows and a function
-	 * @param numRows - the number of rows to be generated
-	 * @param func - a Function object
-	 */
-	public Column(int numRows, Function func) {
-		this.numRows = numRows;
-		this.column = new double[numRows];
-		this.func = func;
-		this.genFuncColumn();
-	
+	public Column(Function func) {
+		this("", func);
 	}
 
-	/*
-	 * Constructs a column from a number of rows and a function
-	 * @param numRows - the number of rows to be generated
-	 * @param dist - a GaussDist object
-	 */
-	public Column(int numRows, GaussDist dist) {
-		this.numRows = numRows;
-		this.column = new double[numRows];
-		this.dist = dist;
-		this.genDistColumn();
-	
+	public Column(GaussDist dist) {
+		this("", dist);
 	}
 	
-	/*
-	 * Constructs a column from a number of rows and a function
-	 * @param numRows - the number of rows to be generated
-	 * @param dist - a GaussDist object
-	 */
-	public Column(Column baseCol, Function func) {
-		this.numRows = baseCol.getColumn().length;
-		this.column = new double[numRows];
+	public Column(String colName, Function func) {
+		if (colName.equals("")) {
+			//colName = "" + Data.getNumCols();
+		}
+		this.colName = colName;
 		this.func = func;
-		this.applyFunc(baseCol, func);
-	
 	}
 	
-	/*
-	 * Constructs a column from a number of rows and a function
-	 * @param baseCol - the column to apply the function to
-	 * @param func - the function to apply to the column
-	 */
-	public void applyFunc(Column baseCol, Function func) {
+	public Column(String colName, GaussDist dist) {
+		if (colName.equals("")) {
+			//colName = "" + Data.getNumCols();
+		}
+		this.colName = colName;
+		this.dist = dist;
 		for(int i = 0; i < numRows; i++) {
-			this.column[i] = func.getVal(baseCol.getColumn()[i]);
+			columnData.add(dist.generateSample());
 		}
 	}
 	
-	public void genFuncColumn() {
-		for (int i = 0; i < numRows; i++) {
-			this.column[i] = this.func.getVal(i);
-		}	
+	/*
+	 * Constructs a column from a number of rows and a function
+	 * @param numRows - the number of rows to be generated
+	 * @param dist - a GaussDist object
+	 */
+	public static Column newColFromFunc(Column baseCol, String colName, Function func) {
+		Column newColumn = new Column(colName, func);
+		ArrayList<Double> baseColData = baseCol.getColumnData();
+		for(int i = 0; i < numRows; i++) {
+			double value = baseColData.get(i).doubleValue();
+			value = func.compute(value);
+			newColumn.columnData.add(new Double(value));
+		}
+		return newColumn;
 	}
 	
-	public double[] genDistColumn() {
-		GaussDist dist = new GaussDist(1, 2);
-		return dist.generateSample(numRows);
+	public ArrayList<Double> getColumnData() {
+		return this.columnData;
 	}
 	
-	public double[] getColumn() {
-		return this.column;
+	public static void setNumRows(long num) {
+		numRows = num;
 	}
+	
+	@Override
+	public String toString() {
+		String str = colName + " :";
+		for(int i = 0; i < numRows; i++) {
+			str = str + ", " + columnData.get(i).toString();
+		}
+		return str;
+	}
+	
+	public void print() {
+		System.out.println(toString());
+	}
+	
+//	public static void main(String[] args) {
+//		System.out.println("NUM ROWS: " + numRows);
+//		GaussDist gd = new GaussDist(0,1);
+//		Column c = new Column("col1", gd);
+//		Poly p = new Poly(2, 1);
+//		Column d = newColFromFunc(c, "col2", p);
+//		c.print();
+//		d.print();
+//	}
 }
 
 
