@@ -29,9 +29,9 @@ public class Trig {
      * @param x the variable
      * @return  the value of the trig function
      */
-    public double getValue(double x) {
-        // If the value hasn't been computed yet, then we comput it first.
-        if(!valueInit) computeValue(x);
+    public double getVal(double x) {
+        // If the value hasn't been computed yet, then we compute it first.
+        if(!valueInit) compute(x);
         return value;
     }
 
@@ -40,7 +40,7 @@ public class Trig {
      * @param x the variable
      * @return the value of the trig function
      */
-    private double computeValue(double x) {
+    private double compute(double x) {
         switch(type) {
             case SIN:
                 return coeff * Math.sin(x);
