@@ -8,10 +8,6 @@ import org.apache.commons.math3.distribution.RealDistribution;
 
 public class Distributions {
     private RealDistribution dist;
-
-    enum DistType{CAUCHY,// CONSTANTREAL, EMPIRICAL, 
-    	//ENUMERATED, EXPONENTIAL, F, GAMMA, GUMBEL, LAPLACE, LEVY, LOGISTIC, 
-    	NORMAL}//, PARETO, T, TRIANGULAR, UNIFORMREAL, WEIBULL}
     
     public Distributions(DistType type) {
     	
